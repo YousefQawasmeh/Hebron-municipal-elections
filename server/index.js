@@ -4,10 +4,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
-import * as path from "path";
+import path from "path";
 
 const app = express();
 
+app.use(express.static(path.join(path.resolve(""), "..", "client", "build")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
