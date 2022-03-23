@@ -4,11 +4,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-app.use(express.static(path.join(path.resolve(""), "..", "client", "build")));
+app.use(express.static(path.join(__dirname, "..", "client", "build")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -26,9 +28,7 @@ app.use("/api", routes);
 
 if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {
-    res.sendFile(
-      path.join(path.resolve(""), "..", "client", "build", "index.html")
-    );
+    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
   });
 }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "";
+const url = "/api";
 // const url = "http://localhost:5000/api";
 
 export const getVoters = (query) => {
