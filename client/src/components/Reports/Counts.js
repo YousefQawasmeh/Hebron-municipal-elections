@@ -21,40 +21,51 @@ const Counts = ({}) => {
   const [allSchools, setAllSchools] = useState([]);
   const [counts, setCounts] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState("");
-  const [voter, setVoter] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [updatedAt, setUpdatedAt] = useState(false);
   const classes = useStyles();
   const totalVotings = 105372;
   //   const counts = {};
   let countsNo = 0;
   useEffect(() => {
+    setLoading(true);
     if (localStorage.getItem("schools")) {
-      setSchools(JSON.parse(localStorage.getItem("schools")));
+      setSchools(JSON.parse(localStorage.getItem("schools")) || []);
+      setLoading(false);
       //   getCountsForAllSchools();
     } else {
       api.getSchools().then((res) => {
         setSchools(res.data);
+        setLoading(false);
         localStorage.setItem("schools", JSON.stringify(res.data));
         // getCountsForAllSchools();
       });
     }
   }, []);
   useEffect(() => {
-    if (Object.keys(counts).length > 0)
+    if (Object.keys(counts).length > 0) {
       localStorage.setItem(
         "counts",
-        JSON.stringify({ counts, updatedAt: moment.now() })
+        JSON.stringify({ counts, updatedAt: moment().format("HH:mm:ss") })
       );
+      setUpdatedAt(moment().format("HH:mm:ss"));
+    }
   }, [counts]);
   useEffect(() => {
-    const oldCounts = JSON.parse(localStorage.getItem("counts"));
+    const oldCounts = JSON.parse(localStorage.getItem("counts")) || {
+      updatedAt: "",
+      counts: {},
+    };
     console.log(
-      moment.now() - oldCounts.updatedAt,
-      ":::",
-      Object.keys(oldCounts.counts).length
+      moment().format("HH:mm:ss"),
+      moment().valueOf(),
+      "55555555551111",
+      ":::"
     );
     if (Object.keys(oldCounts.counts).length > 0) {
       console.log("0000000000000000");
       setCounts(oldCounts.counts);
+      setUpdatedAt(oldCounts.updatedAt);
       return;
     }
     // else console.log("1111111111111111");
@@ -64,6 +75,7 @@ const Counts = ({}) => {
 
   const getCountsForSchool = (school) => {};
   const getCountsForAllSchools = () => {
+    setLoading(true);
     if (schools.length < 1) return;
     setAllSchools(
       schools.map((name) => {
@@ -83,7 +95,10 @@ const Counts = ({}) => {
           .then(({ data }) => {
             counts[name].isNotVoted = data;
             countsNo++;
-            if (74 === countsNo) setCounts({ ...counts });
+            if (74 === countsNo) {
+              setCounts({ ...counts });
+              setLoading(false);
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -92,7 +107,12 @@ const Counts = ({}) => {
       })
     );
   };
-  return (
+  return loading ? (
+    <img
+      style={{ marginRight: "-220px" }}
+      src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg"
+    />
+  ) : (
     <div>
       {/* <Autocomplete
         options={schools}
@@ -114,7 +134,20 @@ const Counts = ({}) => {
         }}
       />
       <br /> */}
-      <h1>احصائيات المدارس</h1>
+      <h1>
+        احصائيات المدارس {updatedAt}
+        <img
+          style={{
+            width: "30px",
+            verticalAlign: "sub",
+          }}
+          onClick={() => {
+            localStorage.removeItem("counts");
+            window.location.reload();
+          }}
+          src="https://i.imgur.com/imaRn8j.png"
+        />
+      </h1>
       <table className={classes.table}>
         <thead>
           <tr>

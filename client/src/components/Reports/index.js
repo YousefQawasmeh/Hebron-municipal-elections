@@ -12,12 +12,19 @@ import {
   Select,
   MenuItem,
   Checkbox,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import DownloadExcell from "./DownloadExcell.js";
 import { CSVLink } from "react-csv";
 import useStyles from "./styles";
 import * as api from "../../api/index.js";
+import moment from "moment";
 // import DataGrid from "./DataGrid.js";
 const Report = ({}) => {
   function customersData() {
@@ -43,6 +50,7 @@ const Report = ({}) => {
   const [searchInfo, setSearchInfo] = useState({});
   const [download, setdownload] = useState(false);
   const [voters, setVoters] = useState([]);
+  const [showVoters, setShowVoters] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -192,36 +200,38 @@ const Report = ({}) => {
           >
             بحث
           </Button>
-          <Button
-            style={{ margin: "0 10px" }}
-            variant="contained"
-            color="secondary"
-            onClick={(e) => {
-              e.preventDefault();
-              //   axios
-              //   .get("/api/voters0000")
-              const report = { ...searchInfo };
-              if (report.isVoted === "all") delete report.isVoted;
-              console.log(!!report);
-              Object.entries(report).forEach(([key, value]) => {
-                if (!value.toString() || value === "all") delete report[key];
-              });
-              api
-                .getCount(JSON.stringify(report))
-                .then((res) => {
-                  console.log(res.data);
-                  // setVoters(res.data);
-                  // setdownload(true);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
-          >
-            احصائيات
-          </Button>
+          {
+            <Button
+              style={{ margin: "0 10px" }}
+              variant="contained"
+              color="secondary"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowVoters(true);
+                // const report = { ...searchInfo };
+                // if (report.isVoted === "all") delete report.isVoted;
+                // console.log(!!report);
+                // Object.entries(report).forEach(([key, value]) => {
+                //   if (!value.toString() || value === "all") delete report[key];
+                // });
+                // api
+                //   .getCount(JSON.stringify(report))
+                //   .then((res) => {
+                //     console.log(res.data);
+
+                //     // setVoters(res.data);
+                //     // setdownload(true);
+                //   })
+                //   .catch((err) => {
+                //     console.log(err);
+                //   });
+              }}
+            >
+              عرض نيجة البحث
+            </Button>
+          }
           {/* <br /> */}
-          {download && (
+          {
             <CSVLink
               onClick={() => {
                 setdownload(false);
@@ -244,8 +254,47 @@ const Report = ({}) => {
                 تصدير الى اكسل
               </Button>
             </CSVLink>
-          )}
+          }
         </form>
+        <h4>
+          عدد الصفوف في اخر عملة بحث: {voters?.length} صف
+          {/* {voters.length} */}
+        </h4>
+        {showVoters && (
+          <TableContainer
+          // component={Paper}
+          >
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>الاسم الاول</TableCell>
+                  <TableCell>الاسم الثاني</TableCell>
+                  <TableCell>الاسم الثالث</TableCell>
+                  <TableCell>اسم العائلة</TableCell>
+                  <TableCell>المدرسة</TableCell>
+                  <TableCell>الرمز الانتخابي</TableCell>
+                  <TableCell>وقت الانتخاب</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {voters?.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.firstName}</TableCell>
+                    <TableCell>{row.secondName}</TableCell>
+                    <TableCell>{row.thirdName}</TableCell>
+                    <TableCell>{row.familyName}</TableCell>
+                    <TableCell>{row.school}</TableCell>
+                    <TableCell>{row.voterID}</TableCell>
+                    <TableCell>
+                      {row.updatedAt &&
+                        moment(row.updatedAt).format("hh:mm:ss")}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </Grid>
       {/* <DownloadExcell voters={voters} download={download} setdownload={setdownload} /> */}
       {/* <DownloadExcell

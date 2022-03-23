@@ -39,7 +39,7 @@ const Voting = ({}) => {
       localStorage.getItem("shcools")
     ) {
       setSelectedSchool(localStorage.getItem("selectedSchool") || "");
-      setVoters(JSON.parse(localStorage.getItem("voters")));
+      setVoters(JSON.parse(localStorage.getItem("voters")) || []);
       setSchools(JSON.parse(localStorage.getItem("schools") || []));
     } else
       api
@@ -158,7 +158,7 @@ const Voting = ({}) => {
           </Button>
         </form>
       </Grid>
-      <Grid
+      {/* <Grid
         item
         xs={4}
         style={{
@@ -175,7 +175,7 @@ const Voting = ({}) => {
             </h4>
           );
         })}
-      </Grid>
+      </Grid> */}
     </Container>
   );
 };

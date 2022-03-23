@@ -20,12 +20,13 @@ export default makeStyles(() => ({
     fontFamily: "arial, sans-serif",
     borderCollapse: "collapse",
     width: "100%",
+    minWidth: "500px",
     // width: "90vw",
 
     " & td, th": {
       border: "1px solid #dddddd",
-      //   textAlign: "left",
-      padding: "8px",
+      textAlign: "right",
+      padding: "3px",
     },
 
     "& tr:nth-child(even)": {

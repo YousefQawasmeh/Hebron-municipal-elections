@@ -14,6 +14,7 @@ export default makeStyles(() => ({
     textAlign: "right",
     fontFamily: "IRANSans",
     // background: "aquamarine",
+    overflow: "auto",
     minHeight: "100vh",
   },
   containerNavButtons: {
