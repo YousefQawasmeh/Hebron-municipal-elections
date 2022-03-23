@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
+import * as path from "path";
 
 const app = express();
 
