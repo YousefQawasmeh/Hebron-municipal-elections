@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const url = "";
-const url = "http://localhost:5000/api";
+const url = "";
+// const url = "http://localhost:5000/api";
 
 export const getVoters = (query) => {
   return axios.get(`${url}/voters?query=${query}`);
