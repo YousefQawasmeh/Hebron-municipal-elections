@@ -141,8 +141,8 @@ const Voting = ({}) => {
               if (voter) {
                 api
                   .createVoting({
-                    _id: voter.voter_id,
-                    votedBy: localStorage.getItem("user_id"),
+                    _id: voter._id,
+                    votedBy: localStorage.getItem("user_id") || "unknown",
                   })
                   .then((res) => {
                     console.log(res);
