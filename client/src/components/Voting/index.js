@@ -24,6 +24,7 @@ const Voting = ({}) => {
   const [voter, setVoter] = useState({});
   // const [value, setValue] = useState('');
   const [voterID, setVoterID] = useState("");
+  const [votingDone, setVotingDone] = useState(null);
   const [fullName, setFullName] = useState("");
   const [selectedSchool, setSelectedSchool] = useState("");
   const [lastVoters, setLastVoters] = useState([
@@ -145,10 +146,14 @@ const Voting = ({}) => {
                     votedBy: localStorage.getItem("user_id") || "unknown",
                   })
                   .then((res) => {
+                    setVotingDone(true);
                     console.log(res);
+                    setFullName("");
+                    setVoterID("");
                     setLastVoters([...lastVoters, voter].slice(-10));
                   })
                   .catch((err) => {
+                    setVotingDone(false);
                     console.log(err);
                   });
               }
@@ -156,6 +161,12 @@ const Voting = ({}) => {
           >
             تصويت
           </Button>
+
+          {votingDone !== null && (
+            <Typography variant="h6" color={votingDone ? "primary" : "error"}>
+              {votingDone ? "تم التصويت بنجاح" : "لم يتم التصويت"}
+            </Typography>
+          )}
         </form>
       </Grid>
       {/* <Grid
