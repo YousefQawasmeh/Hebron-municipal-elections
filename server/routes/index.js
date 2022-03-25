@@ -7,7 +7,7 @@ import {
   getCountBySchool,
   getCountBySchools,
   updateVoter,
-  vote,
+  voting,
   getCount,
 } from "../controlers/voters.js";
 const router = Express.Router();
@@ -18,7 +18,7 @@ router.get("/schools/:school", getVotersBySchool);
 router.get("/getCountBySchools", getCountBySchools);
 router.get("/getCountBySchool", getCountBySchool);
 router.put("/voter/:id", updateVoter);
-router.post("/vote", vote);
+router.post("/voting", voting);
 router.get("/count", getCount);
 
 // router.post("/voters", createVoter);

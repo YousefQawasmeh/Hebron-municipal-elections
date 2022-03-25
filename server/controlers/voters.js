@@ -65,19 +65,19 @@ export const getVotersBySchool = async (req, res) => {
   const voters = await Voter.find({ school: req.params.school });
   res.status(200).json(voters);
 };
-export const getVotersBySchoolByVote = async (req, res) => {
-  const voters = await Voter.find({
-    school: req.params.school,
-    vote: req.params.vote,
-  });
-  res.status(200).json(voters);
-};
+// export const getVotersBySchoolByVote = async (req, res) => {
+//   const voters = await Voter.find({
+//     school: req.params.school,
+//     vote: req.params.vote,
+//   });
+//   res.status(200).json(voters);
+// };
 
 export const getSchools = async (req, res) => {
   const schools = await Voter.distinct("school");
   res.status(200).json(schools);
 };
-export const vote = async (req, res) => {
+export const voting = async (req, res) => {
   const voter = await Voter.findByIdAndUpdate(req.body._id, {
     isVoted: true,
     $inc: {
@@ -126,10 +126,10 @@ export const getVotersByVotedBy = async (req, res) => {
   res.status(200).json(count);
 };
 
-export const getCountByVote = async (req, res) => {
-  const count = await Voter.countDocuments({ vote: req.params.vote });
-  res.status(200).json(count);
-};
+// export const getCountByVote = async (req, res) => {
+//   const count = await Voter.countDocuments({ vote: req.params.vote });
+//   res.status(200).json(count);
+// };
 
 export const getCount = async (req, res) => {
   const count = await Voter.countDocuments({ ...JSON.parse(req.query.query) });
