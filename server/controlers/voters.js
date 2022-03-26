@@ -140,7 +140,22 @@ export const getVoters = async (req, res) => {
   // const searchInfo = queryString.parse(req.query);
   // JSON.parse(req.query);
   // console.log(searchInfo);
-  console.log(JSON.parse(req.query.query).isVoted);
-  const count = await Voter.find({ ...JSON.parse(req.query.query) });
+
+  console.log(JSON.parse(req.query.query));
+  const query = JSON.parse(req.query.query);
+  const temp = {
+    ...query,
+    firstName: { $regex: query.firstName || "" },
+    secondName: { $regex: query.secondName || "" },
+    thirdName: { $regex: query.thirdName || "" },
+    familyName: { $regex: query.familyName || "" },
+  };
+  const count = await Voter.find({
+    ...temp,
+  });
+  // const count = await Voter.find({
+  //   ...JSON.parse(req.query.query),
+  //   firstName: { $regex: "سف" },
+  // });
   res.status(200).json(count);
 };
