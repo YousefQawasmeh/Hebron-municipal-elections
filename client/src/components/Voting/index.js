@@ -101,6 +101,8 @@ const Voting = ({}) => {
           <TextField
             label="الرمز الانتخابي"
             variant="outlined"
+            type="number"
+            style={{ width: "100%", maxWidth: "350px" }}
             margin="normal"
             value={voterID}
             onChange={({ target: { value } }) => {
@@ -123,6 +125,7 @@ const Voting = ({}) => {
           <br />
           <TextField
             disabled
+            style={{ width: "100%", maxWidth: "350px" }}
             label="اسم المنتخب"
             variant="outlined"
             margin="normal"
@@ -133,6 +136,7 @@ const Voting = ({}) => {
           />
           <br />
           <Button
+            style={{ width: "100%", maxWidth: "350px", height: "50px" }}
             type="submit"
             variant="contained"
             color="primary"
