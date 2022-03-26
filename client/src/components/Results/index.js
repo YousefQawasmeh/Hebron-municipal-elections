@@ -139,7 +139,7 @@ const Results = () => {
             newLists
               ?.filter((list) => list.percentage >= minPercentage)
               ?.forEach((list) => {
-                [1, 3, 5, 7, 9, 11, 13].map((item) => {
+                [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].map((item) => {
                   newListsResults.push({
                     listId: list.id,
                     name: list.name,
