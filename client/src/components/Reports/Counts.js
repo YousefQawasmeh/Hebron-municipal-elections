@@ -174,9 +174,11 @@ const Counts = ({}) => {
                 <td>{value.isNotVoted}</td>
                 <td>{value.isNotVoted + value.isVoted}</td>
                 <td>
-                  {(value.isVoted / (value.isNotVoted + value.isVoted)).toFixed(
-                    2
-                  )}
+                  %
+                  {(
+                    (value.isVoted / (value.isNotVoted + value.isVoted)) *
+                    100
+                  ).toFixed(2)}
                 </td>
               </tr>
             );
