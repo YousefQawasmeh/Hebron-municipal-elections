@@ -16,10 +16,11 @@ export default makeStyles(() => ({
     // background: "aquamarine",
     overflow: "auto",
     minHeight: "100vh",
+    padding: "0px",
   },
   containerNavButtons: {
-    display: "flex",
-    flexDirection: "row",
+    // display: "flex",
+    // flexDirection: "row",
     padding: "10px",
     // backgroundColor: "#f5f5f5",
     "& a": {
@@ -27,7 +28,10 @@ export default makeStyles(() => ({
     },
   },
   navButton: {
-    margin: "10px 10px 0",
+    // margin: "10px 10px 0",
+    margin: "10px 2% 0",
+    width: "45%",
+    maxWidth: "150px",
   },
 
   // container: {

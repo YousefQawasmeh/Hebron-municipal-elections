@@ -11,6 +11,7 @@ import LoadData from "./components/LoadData/LoadData";
 import Voting from "./components/Voting/index.js";
 import Reports from "./components/Reports/index.js";
 import Counts from "./components/Reports/Counts";
+import Results from "./components/Results/index.js";
 import {
   BrowserRouter as Router,
   Route,
@@ -28,6 +29,7 @@ const App = () => {
     "/voting",
     "/reports",
     "/counts",
+    "/results",
   ]);
   const classes = useStyles();
   return (
@@ -69,6 +71,15 @@ const App = () => {
                     احصائيات
                   </Button>
                 </Link>
+                <Link to="/results">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.navButton}
+                  >
+                    النتائج
+                  </Button>
+                </Link>
               </Grid>
             )}
             <Routes>
@@ -77,6 +88,7 @@ const App = () => {
               <Route exact path="/voting" element={<Voting />} />
               <Route exact path="/reports" element={<Reports />} />
               <Route exact path="/counts" element={<Counts />} />
+              <Route exact path="/results" element={<Results />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Grid>

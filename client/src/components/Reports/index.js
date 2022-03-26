@@ -231,7 +231,7 @@ const Report = ({}) => {
             </Button>
           }
           {/* <br /> */}
-          {
+          {(voters.length || "") && (
             <CSVLink
               onClick={() => {
                 setdownload(false);
@@ -254,7 +254,7 @@ const Report = ({}) => {
                 تصدير الى اكسل
               </Button>
             </CSVLink>
-          }
+          )}
         </form>
         <h4>
           عدد الصفوف في اخر عملة بحث: {voters?.length} صف
