@@ -13,15 +13,19 @@ export default makeStyles(() => ({
     direction: "rtl",
     textAlign: "right",
     fontFamily: "IRANSans",
-    // background: "aquamarine",
     overflow: "auto",
     minHeight: "100vh",
-    padding: "0px",
+    padding: "10px",
+  },
+  appBar: {
+    minHeight: "30px",
+    justifyContent: "center",
+    textAlign: "center",
   },
   containerNavButtons: {
     // display: "flex",
     // flexDirection: "row",
-    padding: "10px",
+    // padding: "10px",
     // backgroundColor: "#f5f5f5",
     "& a": {
       textDecoration: "none",

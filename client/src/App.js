@@ -35,7 +35,7 @@ const App = () => {
   return (
     <Router>
       <Container maxWidth="lg" className={classes.container}>
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="default" className={classes.appBar}>
           <Typography variant="h3" color="inherit" style={{ fontSize: "5vw" }}>
             انتخابات مجلس بلدية الخليل للعام 2022
           </Typography>

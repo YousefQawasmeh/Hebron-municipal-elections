@@ -27,6 +27,7 @@ export default makeStyles(() => ({
       border: "1px solid #dddddd",
       textAlign: "right",
       padding: "3px",
+      whiteSpace: "nowrap",
     },
 
     "& tr:nth-child(even)": {

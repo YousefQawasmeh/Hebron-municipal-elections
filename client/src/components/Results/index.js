@@ -16,7 +16,6 @@ const Results = () => {
   const [minPercentage, setMinPercentage] = useState(8);
   const [totalVotes, setTotalVotes] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  console.log("000000000", lists);
   useEffect(() => {
     setLists(
       lists.map((list, index) => {
@@ -55,10 +54,6 @@ const Results = () => {
             }}
           >
             <TextField
-              style={{
-                width: "100%",
-                maxWidth: "119px",
-              }}
               type="number"
               autoComplete="off"
               //   key={item}
@@ -84,7 +79,8 @@ const Results = () => {
             {showResult && (
               <h4
                 style={{
-                  padding: "0 10px",
+                  padding: "0 25px 0 0",
+                  whiteSpace: "nowrap",
                 }}
               >
                 عدد المقاعد:
@@ -96,7 +92,8 @@ const Results = () => {
             {showResult && (
               <h4
                 style={{
-                  padding: "0 10px",
+                  padding: "0 25px 0 0",
+                  whiteSpace: "nowrap",
                 }}
               >
                 نسبة الأصوات:
@@ -109,6 +106,7 @@ const Results = () => {
           type="submit"
           variant="contained"
           color="primary"
+          style={{ height: "50px" }}
           onClick={(events) => {
             events.preventDefault();
             setShowResult(true);
@@ -119,6 +117,7 @@ const Results = () => {
             console.log("sum", sum);
             setTotalVotes(sum);
             const newLists = lists.map((list) => {
+              console.log("list", list.votes, sum);
               list.percentage = ((list.votes / sum) * 100).toFixed(2);
               return list;
             });
@@ -139,14 +138,16 @@ const Results = () => {
             newLists
               ?.filter((list) => list.percentage >= minPercentage)
               ?.forEach((list) => {
-                [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].map((item) => {
-                  newListsResults.push({
-                    listId: list.id,
-                    name: list.name,
-                    candidateId: item,
-                    votes: list.votes / item,
-                  });
-                });
+                [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29].map(
+                  (item) => {
+                    newListsResults.push({
+                      listId: list.id,
+                      name: list.name,
+                      candidateId: item,
+                      votes: (list.votes / item).toFixed(1),
+                    });
+                  }
+                );
               });
 
             console.log("22222newListsResults", newListsResults);
@@ -173,7 +174,7 @@ const Results = () => {
           احسب النتيجة
         </Button>
       </form>
-      {/* <Grid
+      <Grid
         container
         style={{
           display: "flex",
@@ -184,12 +185,16 @@ const Results = () => {
           // maxWidth: "300px",
         }}
       >
+        <br />
         {listsResults.map((list, i) => (
-          <Typography>
-            {i + ")"} {list.name}
-          </Typography>
+          <>
+            <Typography>
+              {i + 1 + ")"} {list.name} : {list.votes}
+            </Typography>
+            <br />
+          </>
         ))}
-      </Grid> */}
+      </Grid>
     </Container>
   );
 };
