@@ -1,17 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import {
   TextField,
   Button,
   Container,
-  AppBar,
-  Typography,
-  Grow,
   Grid,
-  Select,
-  MenuItem,
-  Checkbox,
   TableContainer,
   Table,
   TableHead,
@@ -28,15 +21,8 @@ import { CSVLink } from "react-csv";
 import useStyles from "./styles";
 import * as api from "../../api/index.js";
 import moment from "moment";
-// import DataGrid from "./DataGrid.js";
 const Report = ({}) => {
-  const [isVoted, setIsVoted] = useState("all");
-  const [school, setSchool] = useState("");
   const [schools, setSchools] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const [secondName, setSecondName] = useState("");
-  const [thirdName, setThirdName] = useState("");
-  const [familyName, setFamilyName] = useState("");
   const [searchInfo, setSearchInfo] = useState({});
   const [download, setdownload] = useState(false);
   const [voters, setVoters] = useState([]);
@@ -108,23 +94,6 @@ const Report = ({}) => {
             }}
           />
           <br />
-          {/* <Select
-            value={
-              searchInfo.isVoted === true || searchInfo.isVoted === false
-                ? searchInfo.isVoted
-                : "all"
-            }
-            onChange={(e) => {
-              handelChange("isVoted", e.target.value);
-            }}
-          >
-            <MenuItem value={"all"}>
-              <em>الجميع</em>
-            </MenuItem>
-            <MenuItem value={true}>انتخب</MenuItem>
-            <MenuItem value={false}>لم ينتخب</MenuItem>
-          </Select> */}
-
           <RadioGroup
             style={{
               justifyContent: "space-between",
@@ -135,7 +104,6 @@ const Report = ({}) => {
             defaultValue="all"
             value={searchInfo.isVoted || "all"}
             onChange={(e) => {
-              console.log(e.target.value);
               handelChange("isVoted", e.target.value);
             }}
           >
@@ -221,7 +189,6 @@ const Report = ({}) => {
                 if (Object.keys(report).length === 0)
                   return alert("يجب اختيار المدرسة");
                 api.getVoters(JSON.stringify(report)).then((res) => {
-                  console.log(res.data);
                   setVoters(res.data);
                   setdownload(true);
                 });

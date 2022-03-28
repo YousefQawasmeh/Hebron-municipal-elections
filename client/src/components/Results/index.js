@@ -64,8 +64,6 @@ const Results = () => {
               variant="outlined"
               value={item?.votes}
               onChange={(e) => {
-                console.log(e.target.value, item);
-                console.log(lists);
                 setLists(
                   lists.map((list, index) => {
                     if (index === item - 1) {
@@ -114,10 +112,8 @@ const Results = () => {
             const sum = lists.reduce((acc, curr) => {
               return Number(acc) + Number(curr.votes);
             }, 0);
-            console.log("sum", sum);
             setTotalVotes(sum);
             const newLists = lists.map((list) => {
-              console.log("list", list.votes, sum);
               list.percentage = ((list.votes / sum) * 100).toFixed(2);
               return list;
             });
@@ -130,11 +126,7 @@ const Results = () => {
             //     })
             //     .filter((list) => list.percentage * 100 >= minPercentage)
             // );
-            console.log(
-              "222222newLists",
-              newLists?.filter((list) => list.percentage >= minPercentage)
-            );
-            // console.log("222222newLists", newLists);
+
             newLists
               ?.filter((list) => list.percentage >= minPercentage)
               ?.forEach((list) => {
@@ -150,7 +142,6 @@ const Results = () => {
                 );
               });
 
-            console.log("22222newListsResults", newListsResults);
             setListsResults(
               newListsResults
                 .sort((a, b) => {

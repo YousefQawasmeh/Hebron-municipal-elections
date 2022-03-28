@@ -7,7 +7,7 @@ import {
   Grid,
   Button,
 } from "@material-ui/core";
-import LoadData from "./components/LoadData/LoadData";
+// import LoadData from "./components/LoadData/LoadData";
 import Voting from "./components/Voting/index.js";
 import Reports from "./components/Reports/index.js";
 import Counts from "./components/Reports/Counts";
@@ -25,7 +25,7 @@ import useStyles from "./styles";
 const App = () => {
   // const navigate = useNavigate();
   const [pages, setPages] = useState([
-    "/loadData",
+    // "/loadData",
     "/voting",
     "/reports",
     "/counts",
@@ -84,7 +84,7 @@ const App = () => {
             )}
             <Routes>
               <Route exact path="/" element={<Voting />} />
-              <Route exact path="/loadData" element={<LoadData />} />
+              {/* <Route exact path="/loadData" element={<LoadData />} /> */}
               <Route exact path="/voting" element={<Voting />} />
               <Route exact path="/reports" element={<Reports />} />
               <Route exact path="/counts" element={<Counts />} />
@@ -96,16 +96,6 @@ const App = () => {
       </Container>
     </Router>
   );
-  // <Container className={classes.container}>
-  //     <AppBar position="static" color="default">
-  //         <Typography variant="h2" color="inherit">
-  //             <img src="https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/master/client/src/images/memories.png" alt="LOGO" width={60} />
-  //             LOGO
-  //         </Typography>
-  //     </AppBar>
-  //     <Reports />
-  //     <Voting />
-  // </Container>
 };
 
 export default App;

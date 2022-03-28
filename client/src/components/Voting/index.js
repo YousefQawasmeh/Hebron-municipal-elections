@@ -1,35 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import axios from "axios";
 import * as api from "../../api/index.js";
 
 import {
   TextField,
   Button,
   Container,
-  AppBar,
   Typography,
-  Grow,
   Grid,
-  Select,
-  MenuItem,
 } from "@material-ui/core";
 
 const Voting = ({}) => {
-  // const [persons, setPersons] = useState([]);
   const [schools, setSchools] = useState(["لا يوجد اي مدرسة"]);
-
-  // const [person, setPerson] = useState({});
   const [voters, setVoters] = useState([]);
-  const [voter, setVoter] = useState({});
-  // const [value, setValue] = useState('');
   const [voterID, setVoterID] = useState("");
   const [votingDone, setVotingDone] = useState(null);
   const [fullName, setFullName] = useState("");
   const [selectedSchool, setSelectedSchool] = useState("");
-  const [lastVoters, setLastVoters] = useState([
-    { fullName: "يوسف خالد حسن قواسمة" },
-  ]);
+
   // const handleChange = (event) => {
   // setValue(event.target.value);
   // }
@@ -88,7 +76,6 @@ const Voting = ({}) => {
             />
           )}
           onChange={(event, value) => {
-            console.log("value", value || "");
             getVotersBySchool(value || "");
             setSelectedSchool(value || "");
             localStorage.setItem("selectedSchool", value || "");
@@ -108,18 +95,8 @@ const Voting = ({}) => {
             onChange={({ target: { value } }) => {
               setVoterID(value);
               const voter = voters.find((voter) => voter?.voterID === value);
-              console.log(voter);
               if (voter) setFullName(voter.fullName);
               else setFullName("");
-              // setFullName(
-              //   voter.firstName +
-              //     " " +
-              //     voter.secondName +
-              //     " " +
-              //     voter.thirdName +
-              //     " " +
-              //     voter.familyName
-              // );
             }}
           />
           <br />
@@ -151,10 +128,8 @@ const Voting = ({}) => {
                   })
                   .then((res) => {
                     setVotingDone(true);
-                    console.log(res);
                     setFullName("");
                     setVoterID("");
-                    setLastVoters([...lastVoters, voter].slice(-10));
                   })
                   .catch((err) => {
                     setVotingDone(false);
@@ -173,24 +148,6 @@ const Voting = ({}) => {
           )}
         </form>
       </Grid>
-      {/* <Grid
-        item
-        xs={4}
-        style={{
-          position: "absolute",
-          left: "150px",
-          top: "100px",
-        }}
-      >
-        <h3>اخر 10 منتخبين</h3>
-        {lastVoters.map((voter, i) => {
-          return (
-            <h4>
-              {i} - {voter.fullName}
-            </h4>
-          );
-        })}
-      </Grid> */}
     </Container>
   );
 };
