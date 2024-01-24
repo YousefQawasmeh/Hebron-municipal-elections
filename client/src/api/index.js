@@ -16,7 +16,6 @@ export const getSchools = () => {
 };
 
 export const getVotersBySchool = (school) => {
-  console.log("getVotersBySchool", school);
   return axios.get(`${url}/schools/${school}`);
 };
 
