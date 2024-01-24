@@ -1,0 +1,21 @@
+{
+  "name": "Hebron-municipal-elections",
+  "version": "1.0.0",
+  "description": "Hebron municipal elections",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build && cd ../server && npm install "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YousefQawasmeh/Hebron-municipal-elections.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YousefQawasmeh/Hebron-municipal-elections/issues"
+  },
+  "homepage": "https://github.com/YousefQawasmeh/Hebron-municipal-elections#readme"
+}
